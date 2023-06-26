@@ -12,7 +12,7 @@ form.addEventListener("submit", async (e) => {
   document.getElementById("email").value = "";
   document.getElementById("number").value = "";
 
-  const url = "https://jsonplaceholder.typicode.com/posts";
+  const url = "https://us-central1-js-capstone-backend.cloudfunctions.net/api/";
   const options = {
     method: "POST",
     body: JSON.stringify({
