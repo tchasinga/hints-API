@@ -95,3 +95,21 @@ function displayScores(scores) {
     scoresContainer.appendChild(scoreData);
   });
 }
+
+// Retrieve names and scores from the API
+const refreshScores = async (gameID) => {
+  try {
+    const response = await fetch(`${baseURL}games/${gameID}/scores/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    return data.result;
+  } catch (error) {
+    console.error("Error retrieving scores:", error);
+    return [];
+  }
+};
