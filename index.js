@@ -5,7 +5,7 @@ const gameName = async () => {
   const response = await fetch(`${leaderboardApi}games/`, {
     method: 'POST',
     body: JSON.stringify({
-      name: 'Tumaini Maganiko Game',
+      name: 'Tchasinga jack',
     }),
     headers: {
       'content-type': 'application/json; charset=UTF-8',
