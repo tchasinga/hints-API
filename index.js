@@ -1,6 +1,7 @@
 const baseURL = "https://us-central1-js-capstone-backend.cloudfunctions.net/api/";
 
 let gameId;
+let scores = [];
 
 // Create a new game
 async function createGame() {
@@ -19,6 +20,9 @@ async function createGame() {
 
     const data = await response.json();
     gameId = data.result.split("ID: ")[1]; // Extract the game ID from the response
+
+    // Save the game ID to local storage
+    localStorage.setItem("gameId", gameId);
   } catch (error) {
     console.error("Error creating game:", error);
   }
@@ -40,6 +44,9 @@ async function addScore(user, score) {
 
     const data = await response.json();
     console.log(data.result); // Log the result from the API
+
+    // Retrieve the updated scores from the API
+    await getScores();
   } catch (error) {
     console.error("Error adding score:", error);
   }
@@ -50,7 +57,11 @@ async function getScores() {
   try {
     const response = await fetch(`${baseURL}games/${gameId}/scores/`);
     const data = await response.json();
-    displayScores(data.result); // Display the scores on the page
+    scores = data.result; // Update the scores array
+    displayScores(scores); // Display the scores on the page
+
+    // Save the scores to local storage
+    localStorage.setItem("scores", JSON.stringify(scores));
   } catch (error) {
     console.error("Error getting scores:", error);
   }
@@ -67,7 +78,6 @@ document.getElementById("score-form").addEventListener("submit", async (e) => {
   document.getElementById("score").value = "";
 
   await addScore(user, score);
-  await getScores();
 });
 
 // Event listener for the refresh button
@@ -77,11 +87,19 @@ document.getElementById("refresh-btn").addEventListener("click", async () => {
 
 // Initialize the game and display scores on page load
 window.addEventListener("load", async () => {
-  try {
+  // Check if gameId is stored in local storage
+  if (localStorage.getItem("gameId")) {
+    gameId = localStorage.getItem("gameId");
+  } else {
     await createGame();
+  }
+
+  // Check if scores are stored in local storage
+  if (localStorage.getItem("scores")) {
+    scores = JSON.parse(localStorage.getItem("scores"));
+    displayScores(scores);
+  } else {
     await getScores();
-  } catch (error) {
-    console.error("Error initializing the game:", error);
   }
 });
 
