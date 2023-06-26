@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" defer src="index.js"></script>
-    <title>Full-crud-API</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard Content</title>
 </head>
 <body>
-    
-    <form id="form">
-        <input type="text" id="name" maxlength="300" required placeholder="set your name">
-        <input type="email" id="email" maxlength="300" required placeholder="set your email">
-        <input type="number" id="number" maxlength="300" required placeholder="set your password">
-        <input type="submit" value="Add data">
-    </form>
+  <h1>Leaderboard</h1>
 
-    <div id="data-container">
+  <div id="scores-container"></div>
 
-    </div>
+  <form id="score-form">
+    <input type="text" id="user" placeholder="Enter user" required>
+    <input type="number" id="score" placeholder="Enter score" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <button id="refresh-btn">Refresh</button>
+
+  <script src="index.js"></script>
 </body>
 </html>
