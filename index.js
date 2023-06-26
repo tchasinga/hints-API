@@ -2,7 +2,7 @@ const leaderboardApi = 'https://us-central1-js-capstone-backend.cloudfunctions.n
 const gameID = 'vtL6cvMOxCyImcJYZjbt';
 
 const gameName = async () => {
-  const response = await fetch(`${leaderboardApi}games/`, {
+  const response = await fetch(`${leaderboardApi}gameID/`, {
     method: 'POST',
     body: JSON.stringify({
       name: 'Tchasinga jack',
